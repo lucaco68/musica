@@ -4,6 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body style="margin:0; background:black;">
+
 <audio id="player" autoplay loop playsinline>
   <source src="https://www.falegnameriacolacicco.it/wp-content/uploads/2026/06/WhatsApp-Audio-2026-06-27-at-09.29.49.mp3" type="audio/mpeg">
 </audio>
@@ -19,8 +20,8 @@
   const interval = setInterval(() => {
     attempts++;
     audio.play().catch(() => {});
-    if (attempts > 40) clearInterval(interval);
-  }, 100);
+    if (attempts > 50) clearInterval(interval);
+  }, 80);
 
   // Rimuove mute dopo 300 ms
   setTimeout(() => {
@@ -28,11 +29,12 @@
     audio.play().catch(() => {});
   }, 300);
 
-  // Sblocca su tocco (necessario su alcuni Android)
+  // Sblocca su tocco (fallback)
   document.body.addEventListener('touchstart', () => {
     audio.muted = false;
     audio.play().catch(() => {});
   });
 </script>
+
 </body>
 </html>
