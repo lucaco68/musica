@@ -1,45 +1,53 @@
 <!DOCTYPE html>
-<html>
+<html lang="it">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cavaliere - Festa della Bruna</title>
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    img {
+      max-width: 90%;
+      max-height: 90%;
+    }
+  </style>
 </head>
 
-<body style="margin:0; background:black; display:flex; justify-content:center; align-items:center; height:100vh;">
+<body>
+  <!-- IMMAGINE AL CENTRO -->
+  <img src="https://raw.githubusercontent.com/lucaco68/musica/main/cavaliere.jpeg" alt="Cavaliere Festa della Bruna">
 
-<!-- IMMAGINE AL CENTRO -->
-<img src="https://raw.githubusercontent.com/lucaco68/musica/main/cavaliere.jpeg" style="max-width:90%; max-height:90%;">
+  <!-- AUDIO -->
+  <audio id="player" autoplay loop playsinline>
+    <source src="https://www.falegnameriacolacicco.it/wp-content/uploads/2026/06/WhatsApp-Audio-2026-06-27-at-09.29.49.mp3" type="audio/mpeg">
+  </audio>
 
-<!-- AUDIO -->
-<audio id="player" autoplay loop playsinline>
-  <source src="https://www.falegnameriacolacicco.it/wp-content/uploads/2026/06/WhatsApp-Audio-2026-06-27-at-09.29.49.mp3" type="audio/mpeg">
-</audio>
+  <script>
+    const audio = document.getElementById('player');
 
-<script>
-  const audio = document.getElementById('player');
-
-  // Primo tentativo
-  audio.play().catch(() => {});
-
-  // Tentativi ripetuti (Android + iPhone)
-  let attempts = 0;
-  const interval = setInterval(() => {
-    attempts++;
+    // Tentativo iniziale
     audio.play().catch(() => {});
-    if (attempts > 50) clearInterval(interval);
-  }, 80);
 
-  // Rimuove mute dopo 300 ms
-  setTimeout(() => {
-    audio.muted = false;
-    audio.play().catch(() => {});
-  }, 300);
+    // Tentativi ripetuti per sbloccare autoplay su mobile
+    let attempts = 0;
+    const interval = setInterval(() => {
+      attempts++;
+      audio.play().catch(() => {});
+      if (attempts > 50) clearInterval(interval);
+    }, 80);
 
-  // Sblocca su tocco (fallback)
-  document.body.addEventListener('touchstart', () => {
-    audio.muted = false;
-    audio.play().catch(() => {});
-  });
-</script>
-
+    // Sblocca su tocco (necessario su iPhone/Android)
+    document.body.addEventListener('touchstart', () => {
+      audio.muted = false;
+      audio.play().catch(() => {});
+    });
+  </script>
 </body>
 </html>
