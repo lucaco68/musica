@@ -3,9 +3,14 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body style="margin:0; background:black;">
 
-<audio id="player" autoplay loop playsinline>
+<body style="margin:0; background:black; display:flex; justify-content:center; align-items:center; height:100vh;">
+
+<!-- IMMAGINE AL CENTRO -->
+<img src="https://raw.githubusercontent.com/lucaco68/musica/main/cavaliere.jpeg" style="max-width:90%; max-height:90%;">
+
+<!-- AUDIO -->
+audio id="player" autoplay loop playsinline>
   <source src="https://www.falegnameriacolacicco.it/wp-content/uploads/2026/06/WhatsApp-Audio-2026-06-27-at-09.29.49.mp3" type="audio/mpeg">
 </audio>
 
@@ -30,11 +35,4 @@
   }, 300);
 
   // Sblocca su tocco (fallback)
-  document.body.addEventListener('touchstart', () => {
-    audio.muted = false;
-    audio.play().catch(() => {});
-  });
-</script>
-
-</body>
-</html>
+  document
