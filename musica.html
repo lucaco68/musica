@@ -10,7 +10,7 @@
 <img src="https://raw.githubusercontent.com/lucaco68/musica/main/cavaliere.jpeg" style="max-width:90%; max-height:90%;">
 
 <!-- AUDIO -->
-audio id="player" autoplay loop playsinline>
+<audio id="player" autoplay loop playsinline>
   <source src="https://www.falegnameriacolacicco.it/wp-content/uploads/2026/06/WhatsApp-Audio-2026-06-27-at-09.29.49.mp3" type="audio/mpeg">
 </audio>
 
@@ -35,4 +35,11 @@ audio id="player" autoplay loop playsinline>
   }, 300);
 
   // Sblocca su tocco (fallback)
-  document
+  document.body.addEventListener('touchstart', () => {
+    audio.muted = false;
+    audio.play().catch(() => {});
+  });
+</script>
+
+</body>
+</html>
