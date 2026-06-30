@@ -1,64 +1,93 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cavaliere</title>
-  <style>
-    body {
-      margin: 0;
-      background: black;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      overflow: hidden;
-    }
-    #bgvideo {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      opacity: 0;
-      pointer-events: none;
-    }
-    img {
-      max-width: 90%;
-      max-height: 90%;
-      z-index: 10;
-    }
-  </style>
-</head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cavaliere</title>
 
+<style>
+html, body{
+    margin:0;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:#000;
+}
+
+body{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* Video invisibile (serve solo per l'audio) */
+#bgvideo{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    opacity:0;
+    pointer-events:none;
+}
+
+/* Immagine visibile */
+img{
+    max-width:90%;
+    max-height:90%;
+    position:relative;
+    z-index:10;
+    user-select:none;
+    -webkit-user-drag:none;
+}
+</style>
+
+</head>
 <body>
 
-  <video id="bgvideo" autoplay playsinline muted loop>
+<video
+    id="bgvideo"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="auto">
+
     <source src="https://raw.githubusercontent.com/lucaco68/musica/main/cavaliere.mp4" type="video/mp4">
-  </video>
 
-  <img src="https://raw.githubusercontent.com/lucaco68/musica/main/cavaliere.jpeg" alt="Cavaliere">
+    Il browser non supporta il video.
+</video>
 
-  <script>
-    const v = document.getElementById('bgvideo');
+<img
+    src="https://raw.githubusercontent.com/lucaco68/musica/main/cavaliere.jpeg"
+    alt="Cavaliere">
 
-    let tries = 0;
-    const interval = setInterval(() => {
-      tries++;
-      v.play().catch(() => {});
-      if (tries > 200) clearInterval(interval);
-    }, 50);
+<script>
 
-    setTimeout(() => {
-      v.muted = false;
-      v.play().catch(() => {});
-    }, 500);
+const video = document.getElementById("bgvideo");
 
-    document.body.addEventListener('touchstart', () => {
-      v.muted = false;
-      v.play().catch(() => {});
+// Avvio del video muto
+video.play().catch(()=>{});
+
+// Attiva audio al primo click/tocco
+function avviaAudio(){
+
+    video.muted = false;
+
+    video.play().then(()=>{
+        console.log("Audio attivato");
+    }).catch(err=>{
+        console.log(err);
     });
-  </script>
+
+}
+
+// Primo click
+document.addEventListener("click", avviaAudio, {once:true});
+
+// Primo tocco
+document.addEventListener("touchstart", avviaAudio, {once:true});
+
+</script>
 
 </body>
 </html>
