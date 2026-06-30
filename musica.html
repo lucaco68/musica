@@ -2,43 +2,67 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <style>
 body {
   margin: 0;
   background: black;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
 }
+
+/* IMMAGINE RESPONSIVE */
 img {
-  width: 90%;
+  width: 100%;
+  height: auto;
   max-width: 600px;
+  object-fit: contain;
+  display: block;
 }
+
+/* VIDEO INVISIBILE PER AUDIO IN LOOP */
 video {
   width: 1px;
   height: 1px;
   opacity: 0;
   position: absolute;
 }
+
+/* TESTO FINALE “EVVIVA MARIA” */
+#evviva {
+  margin-top: 20px;
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  text-shadow: 0 0 10px #ffddff, 0 0 20px #ff88ff, 0 0 30px #ff44ff;
+  font-family: 'Georgia', serif;
+}
 </style>
+
 </head>
 <body>
 
 <!-- IMMAGINE -->
 <img src="cavaliere.jpeg" alt="Festa della Bruna">
 
-<!-- AUDIO (video invisibile) -->
-<video id="v" autoplay playsinline>
-  <source src="cavaliere.mp3" type="audio/mpeg">
+<!-- FRASE FINALE -->
+<div id="evviva">EVVIVA MARIA</div>
+
+<!-- AUDIO IN LOOP -->
+<video id="musica" autoplay loop playsinline muted>
+  <source src="cavaliere.mp4" type="video/mp4">
 </video>
 
 <script>
-const v = document.getElementById('v');
+const musica = document.getElementById('musica');
 
 function playAudio() {
-  v.muted = false;
-  v.play().catch(()=>{});
+  musica.muted = false;
+  musica.play().catch(()=>{});
 }
 
 setTimeout(playAudio, 300);
