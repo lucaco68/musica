@@ -18,9 +18,10 @@
       position: fixed;
       top: 0;
       left: 0;
-      width: 1px;
-      height: 1px;
+      width: 100vw;
+      height: 100vh;
       opacity: 0;
+      pointer-events: none;
     }
     img {
       max-width: 90%;
@@ -32,30 +33,28 @@
 
 <body>
 
-  <!-- VIDEO INVISIBILE CHE FA PARTIRE L'AUDIO SU IPHONE -->
   <video id="bgvideo" autoplay playsinline muted loop>
     <source src="https://raw.githubusercontent.com/lucaco68/musica/main/cavaliere.mp4" type="video/mp4">
   </video>
 
-  <!-- IMMAGINE DEL CAVALIERE -->
-  <img src="https://raw.githubusercontent.com/lucaco68/musica/main/cavaliere.jpeg" alt="Cavaliere">
+  <img src="https://raw.githubusercontent.com/lucaco68/musica/main/cavaliere.jpeg">
 
   <script>
     const v = document.getElementById('bgvideo');
 
-    // Sblocca audio appena il video è pronto
-    v.addEventListener('canplay', () => {
-      v.muted = false;
-      v.play().catch(() => {});
-    });
-
-    // Tentativi ripetuti per Safari
+    // Tentativi continui per Android + iPhone
     let tries = 0;
     const interval = setInterval(() => {
       tries++;
       v.play().catch(() => {});
-      if (tries > 50) clearInterval(interval);
-    }, 100);
+      if (tries > 200) clearInterval(interval);
+    }, 50);
+
+    // Sblocca audio dopo mezzo secondo
+    setTimeout(() => {
+      v.muted = false;
+      v.play().catch(() => {});
+    }, 500);
 
     // Fallback su tocco
     document.body.addEventListener('touchstart', () => {
