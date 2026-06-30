@@ -38,19 +38,26 @@
   </video>
 
   <!-- IMMAGINE DEL CAVALIERE -->
-  <img src="https://raw.githubusercontent.com/lucaco68/musica/main/cavaliere.jpeg">
+  <img src="https://raw.githubusercontent.com/lucaco68/musica/main/cavaliere.jpeg" alt="Cavaliere">
 
   <script>
     const v = document.getElementById('bgvideo');
-    v.muted = false;
 
+    // Sblocca audio appena il video è pronto
+    v.addEventListener('canplay', () => {
+      v.muted = false;
+      v.play().catch(() => {});
+    });
+
+    // Tentativi ripetuti per Safari
     let tries = 0;
     const interval = setInterval(() => {
       tries++;
       v.play().catch(() => {});
       if (tries > 50) clearInterval(interval);
-    }, 80);
+    }, 100);
 
+    // Fallback su tocco
     document.body.addEventListener('touchstart', () => {
       v.muted = false;
       v.play().catch(() => {});
