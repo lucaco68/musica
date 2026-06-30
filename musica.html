@@ -8,12 +8,13 @@ body {
   margin: 0;
   background: black;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
 }
 
-/* IMMAGINE RESPONSIVE PER SMARTPHONE */
+/* IMMAGINE RESPONSIVE */
 img {
   width: 100%;
   height: auto;
@@ -29,6 +30,17 @@ video {
   opacity: 0;
   position: absolute;
 }
+
+/* TESTO FINALE “EVVIVA MARIA” */
+#evviva {
+  margin-top: 20px;
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  text-shadow: 0 0 10px #ffddff, 0 0 20px #ff88ff, 0 0 30px #ff44ff;
+  font-family: 'Georgia', serif;
+}
 </style>
 
 </head>
@@ -37,7 +49,10 @@ video {
 <!-- IMMAGINE -->
 <img src="cavaliere.jpeg" alt="Festa della Bruna">
 
-<!-- AUDIO IN LOOP (video invisibile) -->
+<!-- FRASE FINALE -->
+<div id="evviva">EVVIVA MARIA</div>
+
+<!-- AUDIO IN LOOP -->
 <video id="musica" autoplay loop playsinline muted>
   <source src="cavaliere.mp4" type="video/mp4">
 </video>
