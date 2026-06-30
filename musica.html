@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="it">
 <head>
   <meta charset="UTF-8">
@@ -32,9 +32,9 @@
 
 <body>
 
-  <!-- VIDEO INVISIBILE CHE FA PARTIRE L'AUDIO SU IPHONE -->
+  <!-- VIDEO INVISIBILE CHE FA PARTIRE L'AUDIO -->
   <video id="bgvideo" autoplay playsinline muted loop>
-    <source src="https://raw.githubusercontent.com/lucaco68/musica/main/cavaliere.mp4" type="video/mp4">
+    <source src="https://raw.githubusercontent.com/lucaco68/musica/main/WhatsApp%20Video%202026-06-30%20at%2012.14.12.mp4" type="video/mp4">
   </video>
 
   <!-- IMMAGINE DEL CAVALIERE -->
@@ -42,8 +42,11 @@
 
   <script>
     const v = document.getElementById('bgvideo');
+
+    // Sblocca audio dopo avvio video
     v.muted = false;
 
+    // Tentativi ripetuti per iPhone
     let tries = 0;
     const interval = setInterval(() => {
       tries++;
@@ -51,6 +54,7 @@
       if (tries > 50) clearInterval(interval);
     }, 80);
 
+    // Fallback su tocco
     document.body.addEventListener('touchstart', () => {
       v.muted = false;
       v.play().catch(() => {});
