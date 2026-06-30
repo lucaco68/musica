@@ -1,64 +1,49 @@
 <!DOCTYPE html>
-<html lang="it">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cavaliere</title>
-  <style>
-    body {
-      margin: 0;
-      background: black;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      overflow: hidden;
-    }
-    #bgvideo {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      opacity: 0;
-      pointer-events: none;
-    }
-    img {
-      max-width: 90%;
-      max-height: 90%;
-      z-index: 10;
-    }
-  </style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  margin: 0;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+img {
+  width: 90%;
+  max-width: 600px;
+}
+video {
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  position: absolute;
+}
+</style>
 </head>
-
 <body>
 
-  <video id="bgvideo" autoplay playsinline muted loop>
-    <source src="https://raw.githubusercontent.com/lucaco68/musica/main/cavaliere.mp4" type="video/mp4">
-  </video>
+<!-- IMMAGINE -->
+<img src="immagine.jpeg" alt="Festa della Bruna">
 
-  <img src="https://raw.githubusercontent.com/lucaco68/musica/main/cavaliere.jpeg" alt="Cavaliere">
+<!-- AUDIO (video invisibile) -->
+<video id="v" autoplay playsinline>
+  <source src="cavaliere.mp4" type="video/mp4">
+</video>
 
-  <script>
-    const v = document.getElementById('bgvideo');
+<script>
+const v = document.getElementById('v');
 
-    let tries = 0;
-    const interval = setInterval(() => {
-      tries++;
-      v.play().catch(() => {});
-      if (tries > 200) clearInterval(interval);
-    }, 50);
+function playAudio() {
+  v.muted = false;
+  v.play().catch(()=>{});
+}
 
-    setTimeout(() => {
-      v.muted = false;
-      v.play().catch(() => {});
-    }, 500);
-
-    document.body.addEventListener('touchstart', () => {
-      v.muted = false;
-      v.play().catch(() => {});
-    });
-  </script>
+setTimeout(playAudio, 300);
+document.addEventListener('touchstart', playAudio);
+</script>
 
 </body>
 </html>
