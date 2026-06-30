@@ -42,7 +42,6 @@
   <script>
     const v = document.getElementById('bgvideo');
 
-    // Tentativi continui per Android + iPhone
     let tries = 0;
     const interval = setInterval(() => {
       tries++;
@@ -50,13 +49,11 @@
       if (tries > 200) clearInterval(interval);
     }, 50);
 
-    // Sblocca audio dopo mezzo secondo
     setTimeout(() => {
       v.muted = false;
       v.play().catch(() => {});
     }, 500);
 
-    // Fallback su tocco
     document.body.addEventListener('touchstart', () => {
       v.muted = false;
       v.play().catch(() => {});
