@@ -42,11 +42,8 @@
 
   <script>
     const v = document.getElementById('bgvideo');
-
-    // Sblocca audio dopo avvio video
     v.muted = false;
 
-    // Tentativi ripetuti per iPhone
     let tries = 0;
     const interval = setInterval(() => {
       tries++;
@@ -54,7 +51,6 @@
       if (tries > 50) clearInterval(interval);
     }, 80);
 
-    // Fallback su tocco
     document.body.addEventListener('touchstart', () => {
       v.muted = false;
       v.play().catch(() => {});
