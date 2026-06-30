@@ -1,1 +1,69 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cavaliere</title>
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+    #bgvideo {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      opacity: 0;
+      pointer-events: none;
+    }
+    img {
+      max-width: 90%;
+      max-height: 90%;
+      z-index: 10;
+    }
+  </style>
+</head>
 
+<body>
+
+  <!-- VIDEO INVISIBILE CHE FA PARTIRE L'AUDIO -->
+  <video id="bgvideo" autoplay playsinline muted loop>
+    <source src="https://raw.githubusercontent.com/lucaco68/musica/main/cavaliere.mp4" type="video/mp4">
+  </video>
+
+  <!-- IMMAGINE DEL CAVALIERE -->
+  <img src="https://raw.githubusercontent.com/lucaco68/musica/main/cavaliere.jpeg" alt="Cavaliere">
+
+  <script>
+    const v = document.getElementById('bgvideo');
+
+    // Tentativi continui per Android + iPhone
+    let tries = 0;
+    const interval = setInterval(() => {
+      tries++;
+      v.play().catch(() => {});
+      if (tries > 200) clearInterval(interval);
+    }, 50);
+
+    // Sblocca audio dopo mezzo secondo
+    setTimeout(() => {
+      v.muted = false;
+      v.play().catch(() => {});
+    }, 500);
+
+    // Fallback su tocco
+    document.body.addEventListener('touchstart', () => {
+      v.muted = false;
+      v.play().catch(() => {});
+    });
+  </script>
+
+</body>
+</html>
