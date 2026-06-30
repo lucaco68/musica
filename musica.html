@@ -1,49 +1,52 @@
-<!DOCTYPE html>
-<html>
+!DOCTYPE html>
+<html lang="it">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cavaliere</title>
+
 <style>
-body {
-  margin: 0;
-  background: black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+body{
+    margin:0;
+    height:100vh;
+    background:black;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
 }
-img {
-  width: 90%;
-  max-width: 600px;
-}
-video {
-  width: 1px;
-  height: 1px;
-  opacity: 0;
-  position: absolute;
+
+/* immagine centrale */
+img{
+    max-width:90%;
+    max-height:90%;
+    user-select:none;
 }
 </style>
 </head>
+
 <body>
 
-<!-- IMMAGINE -->
-<img src="cavaliere.jpeg" alt="Festa della Bruna">
+<img src="cavaliere.jpeg" alt="Cavaliere">
 
-<!-- AUDIO (video invisibile) -->
-<video id="v" autoplay playsinline>
-  <source src="cavaliere.mp3" type="audio/mpeg">
-</video>
+<!-- audio -->
+<audio id="musica" loop preload="auto">
+    <source src="cavaliere.mp3" type="audio/mpeg">
+</audio>
 
 <script>
-const v = document.getElementById('v');
+const audio = document.getElementById("musica");
 
-function playAudio() {
-  v.muted = false;
-  v.play().catch(()=>{});
+// serve interazione utente per avviare audio
+function avviaMusica(){
+    audio.play().catch(()=>{});
 }
 
-setTimeout(playAudio, 300);
-document.addEventListener('touchstart', playAudio);
+// click + touch
+document.addEventListener("click", avviaMusica, {once:true});
+document.addEventListener("touchstart", avviaMusica, {once:true});
 </script>
 
 </body>
 </html>
+🎧 COME FUNZIONA
